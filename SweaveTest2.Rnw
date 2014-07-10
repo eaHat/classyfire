@@ -1,0 +1,18 @@
+\documentclass[a4paper]{article}
+
+\title{Permutation Results}
+\author{Author}
+
+\begin{document}
+\SweaveOpts{concordance=TRUE}
+
+<<echo=FALSE>>=
+source('~/Desktop/newPack/plotFunc.R')
+source('~/Desktop/newPack/statFunc.R')
+@
+
+
+\setkeys{Gin}{width=1.0\textwidth} 
+<<echo=TRUE,fig=TRUE,width=9,height=15>>= 
+
+p <- ggplotTest(
