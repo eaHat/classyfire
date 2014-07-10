@@ -1,0 +1,10 @@
+Package: classyfire
+Type: Package
+Title: Optimised multivariate classification models
+Version: 0.1-0
+Date: 2014-07-10
+Author: Eleni Chatzimichali <hatzimihali.eleni@gmail.com>, Conrad Bessant <c.bessant@qmul.ac.uk>
+Maintainer: Eleni Chatzimichali <hatzimihali.eleni@gmail.com>
+Description: The classyfire package provides optimised multivariate classification analysis by incorporating parallel programming as a means of significantly minimising the computational complexity and execution times as well as improving the overall performance of the classifiers and the classification ensembles. In addition, the package introduces a new heuristic methodology for speeding up the optimisation process of the SVM hyperparameters via bootstrapping, chiefly focusing on the cases of SVMs with the RBF kernel. In this novel approach, a fast and robust approximation algorithm for constrained nonlinear optimisation, the Box complex algorithm, was used to replace the widely applied yet computationally intensive grid-search. 
+License: GPL (>= 2)
+Depends: e1071, boot, neldermead (>= 1.0-8), snowfall (>= 1.84-6), ggplot2

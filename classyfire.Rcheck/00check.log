@@ -1,0 +1,122 @@
+* using log directory ‘/Users/elenachatzimichali/Desktop/classyfire/classyfire.Rcheck’
+* using R version 3.1.0 (2014-04-10)
+* using platform: x86_64-apple-darwin13.1.0 (64-bit)
+* using session charset: UTF-8
+* checking for file ‘classyfire/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘classyfire’ version ‘0.1-0’
+* checking package namespace information ... OK
+* checking package dependencies ... OK
+* checking if this is a source package ... OK
+* checking if there is a namespace ... OK
+* checking for executable files ... OK
+* checking for hidden files and directories ... OK
+* checking for portable file names ... OK
+* checking for sufficient/correct file permissions ... OK
+* checking whether package ‘classyfire’ can be installed ... OK
+* checking installed package size ... OK
+* checking package directory ... OK
+* checking DESCRIPTION meta-information ... OK
+* checking top-level files ... OK
+* checking for left-over files ... OK
+* checking index information ... OK
+* checking package subdirectories ... OK
+* checking R files for non-ASCII characters ... OK
+* checking R files for syntax errors ... OK
+* checking whether the package can be loaded ... OK
+* checking whether the package can be loaded with stated dependencies ... OK
+* checking whether the package can be unloaded cleanly ... OK
+* checking whether the namespace can be loaded with stated dependencies ... OK
+* checking whether the namespace can be unloaded cleanly ... OK
+* checking loading without being on the library search path ... OK
+* checking dependencies in R code ... NOTE
+'library' or 'require' call to ‘snowfall’ which was already attached by Depends.
+  Please remove these calls from your code.
+Packages in Depends field not imported from:
+  ‘boot’ ‘e1071’ ‘ggplot2’ ‘neldermead’ ‘snowfall’
+  These packages need to be imported from (in the NAMESPACE file)
+  for when this namespace is loaded but not attached.
+See the information on DESCRIPTION files in the chapter ‘Creating R
+packages’ of the ‘Writing R Extensions’ manual.
+* checking S3 generic/method consistency ... WARNING
+ensRBF:
+  function(inputData, inputClass, ...)
+ensRBF.default:
+  function(inputData, inputClass, bootNum, ensembleNum, runParallel,
+           cpus, type, socketHosts)
+
+See section ‘Generic functions and methods’ of the ‘Writing R
+Extensions’ manual.
+* checking replacement functions ... OK
+* checking foreign function calls ... OK
+* checking R code for possible problems ... NOTE
+.complexFunc: no visible global function definition for
+  ‘neldermead.configure’
+.runRadialComplex: no visible binding for global variable ‘inputClass’
+.runRadialComplex: no visible binding for global variable ‘inputData’
+.runRadialComplex: no visible binding for global variable ‘bootNum’
+.snowRBF: no visible binding for global variable ‘e1071’
+.snowRBFperm: no visible binding for global variable ‘e1071’
+ggClassBar: no visible binding for global variable ‘Class’
+ggClassBar: no visible binding for global variable ‘Percentage’
+ggClassPred: no visible binding for global variable ‘OriginalClass’
+ggClassPred: no visible binding for global variable ‘Percentage’
+ggClassPred: no visible binding for global variable ‘PredClass’
+ggEnsHist: no visible binding for global variable ‘Accuracies’
+ggEnsHist: no visible binding for global variable ‘..density..’
+ggEnsHist: no visible binding for global variable ‘..count..’
+ggPermHist: no visible binding for global variable ‘Accuracies’
+ggPermHist: no visible binding for global variable ‘..density..’
+ggPermHist: no visible binding for global variable ‘x’
+ggPermHist: no visible binding for global variable ‘y’
+ggPermHist: no visible binding for global variable ‘..count..’
+ggbarTest: no visible binding for global variable ‘Ensemble’
+ggbarTest: no visible binding for global variable ‘Accuracy’
+ggplotTrend: no visible binding for global variable ‘Ensemble’
+ggplotTrend: no visible binding for global variable ‘Avg_Accuracy’
+* checking Rd files ... OK
+* checking Rd metadata ... OK
+* checking Rd cross-references ... OK
+* checking for missing documentation entries ... OK
+* checking for code/documentation mismatches ... OK
+* checking Rd \usage sections ... OK
+* checking Rd contents ... OK
+* checking for unstated dependencies in examples ... OK
+* checking examples ... ERROR
+Running examples in ‘classyfire-Ex.R’ failed
+The error most likely occurred in:
+
+> ### Name: avgTestAcc
+> ### Title: Average test accuracy for a classification ensemble
+> ### Aliases: avgTestAcc
+> 
+> ### ** Examples
+> 
+> 
+> data(iris)
+> 
+> sampleIris = iris[,5]
+> iris = iris[,-5]
+>             
+> obj <- ensRBF(iris, sampleIris, bootNum = 10, ensembleNum = 20, runParallel = TRUE, 
++               cpus = 4, type = "SOCK")
+R Version:  R version 3.1.0 (2014-04-10) 
+
+snowfall 1.84-6 initialized (using snow 0.3-13): parallel execution on 4 CPUs.
+
+Library neldermead loaded.
+Library neldermead loaded in cluster.
+
+Library e1071 loaded.
+Library e1071 loaded in cluster.
+
+Library boot loaded.
+Library boot loaded in cluster.
+
+Error in checkForRemoteErrors(val) : 
+  4 nodes produced errors; first error: could not find function "neldermead.configure"
+Calls: ensRBF ... clusterApply -> staticClusterApply -> checkForRemoteErrors
+
+Stopping cluster
+
+Execution halted
