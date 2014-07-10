@@ -1,0 +1,21 @@
+\documentclass{article}
+
+\begin{document}
+ 
+<<loadingchunk, echo=FALSE>>=
+ 
+## For our example the only thing I'm changing is
+## the seed used
+set.seed(<%= x %>)
+mydata <- rnorm(5)
+@
+ 
+Blah blah blah.
+ 
+Let's look at our data using a seed of <%= x %>
+ 
+<<printingchunk>>=
+print(mydata)
+@
+ 
+\end{document}
