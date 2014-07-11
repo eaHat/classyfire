@@ -1,14 +1,8 @@
-
-# Run parallel scripts using the snow/snowfall package in R
-
-.snowRBF <- function(inputData, inputClass, bootNum, ensembleNum, runParallel, cpus, type, socketHosts) {
-  
+.snowRBF <- function(inputData, inputClass, bootNum, ensNum, parallel, cpus, type, socketHosts) {
   if ("package:snowfall" %in% search()) {
-    
     if (isTRUE(unique(c("package:boot", "package:neldermead","package:e1071") %in% search()))) {
-      
       tryCatch({
-        sfInit( parallel = runParallel, cpus = cpus, type = type, socketHosts = socketHosts)
+        sfInit( parallel = parallel, cpus = cpus, type = type, socketHosts = socketHosts)
         
         # Send the libraries
         sfLibrary(neldermead)
@@ -16,20 +10,20 @@
         sfLibrary(boot)
           
         # Send the variables
-        sfExport("inputData", local=TRUE)
+        sfExport("inputData",  local=TRUE)
         sfExport("inputClass", local=TRUE)
-        sfExport("bootNum", local=TRUE)
+        sfExport("bootNum",    local=TRUE)
         
-        parComplexRes <- sfLapply(1:ensembleNum, .runRadialComplex)
+        parComplexRes <- sfLapply(1:ensembleNum, .boxRadial)
         return(parComplexRes)
         
-        sfStop()}, finally=sfStop())
+        sfStop()
+      }, finally=sfStop())
     } else {
       stop ("Please load the packages: boot, neldermead and e1071")
     }
   }
-  else 
-  {
+  else {
     stop ("The snowfall package has not been loaded. Please try again.")
   }
 }
