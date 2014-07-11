@@ -1,0 +1,81 @@
+
+R version 3.1.0 (2014-04-10) -- "Spring Dance"
+Copyright (C) 2014 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin13.1.0 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "classyfire"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> library('classyfire')
+Loading required package: e1071
+Loading required package: boot
+Loading required package: neldermead
+Loading required package: optimbase
+Loading required package: Matrix
+Loading required package: optimsimplex
+
+Attaching package: ‘optimsimplex’
+
+The following object is masked from ‘package:boot’:
+
+    simplex
+
+Loading required package: snowfall
+Loading required package: snow
+Loading required package: ggplot2
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("avgTestAcc")
+> ### * avgTestAcc
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: avgTestAcc
+> ### Title: Average test accuracy for a classification ensemble
+> ### Aliases: avgTestAcc
+> 
+> ### ** Examples
+> 
+> 
+> data(iris)
+> 
+> sampleIris = iris[,5]
+> iris = iris[,-5]
+>             
+> obj <- ensRBF(iris, sampleIris, bootNum = 10, ensembleNum = 20, runParallel = TRUE, 
++               cpus = 4, type = "SOCK")
+R Version:  R version 3.1.0 (2014-04-10) 
+
+snowfall 1.84-6 initialized (using snow 0.3-13): parallel execution on 4 CPUs.
+
+Library neldermead loaded.
+Library neldermead loaded in cluster.
+
+Library e1071 loaded.
+Library e1071 loaded in cluster.
+
+Library boot loaded.
+Library boot loaded in cluster.
+
+Error in checkForRemoteErrors(val) : 
+  4 nodes produced errors; first error: could not find function "neldermead.configure"
+Calls: ensRBF ... clusterApply -> staticClusterApply -> checkForRemoteErrors
+
+Stopping cluster
+
+Execution halted

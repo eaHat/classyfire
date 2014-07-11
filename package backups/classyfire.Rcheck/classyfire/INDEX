@@ -1,0 +1,20 @@
+avgTestAcc              Average test accuracy for a classification
+                        ensemble
+avgTrainAcc             Average train accuracy for a classification
+                        ensemble
+confMatr                Confusion matrix
+ensRBF                  Optimisation of the RBF SVM tuning process via
+                        bootstrapping
+fiveNumSummary          Five number summary
+ggClassBar              Per class accuracies of correctly classified
+                        samples
+ggClassPred             Barplot of the per class accuracies.
+ggEnsHist               Ensemble Histograms
+ggPermHist              Permutation Histograms
+ggbarTest               Test Accuracies Scatter Plot
+ggplotTrend             Trend of the test accuracies
+optimParams             Optimal Paramaters
+overallClassPred        Overal Class Predictions
+runPermutation          Permutation tests
+testAcc                 Test Accuracies (%CC)
+trainAcc                Train Accuracies
