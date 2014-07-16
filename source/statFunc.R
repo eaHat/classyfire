@@ -1,18 +1,15 @@
-# Statistics 
-
-testAcc <- function(ens) {
+getTestAcc <- function(ens) {
   vec =  sapply(ens,"[[",1)
-  return (round(vec, digits = 2))
+  return (round(vec, digits = 1))
 }
 
 avgTestAcc <- function(ens) {
   return(round(mean(sapply(ens,"[[",1)), digits=2))
 }
 
-
-trainAcc <- function(ens) {
+getTrainAcc <- function(ens) {
   vec =  sapply(ens,"[[",2)
-  return (round(vec, digits = 2))
+  return (round(vec, digits=2))
 }
 
 avgTrainAcc <- function(ens) {
@@ -20,13 +17,13 @@ avgTrainAcc <- function(ens) {
 }
 
 confMatr <- function(iter, ens) { 
-  confTable = ens[[iter]]$conf_matrix
+  confTable = ens[[iter]]$confMatr
   return(confTable)
 }
 
 optimParams <- function(ens) {
-  gamma =  sapply(ens,"[[", 14)
-  cost  =  sapply(ens,"[[", 15)
+  gamma =  sapply(ens,"[[", 3)
+  cost  =  sapply(ens,"[[", 4)
   
   matr = cbind(gamma, cost)
   colnames(matr) = c("optim Gamma", "optim Cost")
@@ -35,24 +32,24 @@ optimParams <- function(ens) {
 }
 
 overallClassPred <- function(ens) {
-  confMatr = apply(sapply(ens,"[[",3), 1, "sum")
-  tbc = matrix(confMatr, nrow = nrow(ens[[1]]$conf_matrix), ncol = ncol(ens[[1]]$conf_matrix))
+  confMatr = apply(sapply(ens,"[[", 6), 1, "sum")
+  tbc = matrix(confMatr, nrow = nrow(ens[[1]]$confMatr), ncol = ncol(ens[[1]]$confMatr))
   propTable = round(prop.table(tbc, 1)*100)
-  colnames(propTable) = colnames(ens[[1]]$conf_matrix)
-  rownames(propTable) = rownames(ens[[1]]$conf_matrix)
+  colnames(propTable) = colnames(ens[[1]]$confMatr)
+  rownames(propTable) = rownames(ens[[1]]$confMatr)
   return(propTable)
   #diag(round(prop.table(tbc, 1)*100))
 }
 
-fiveNumSummary <- function(permObj) {
+fiveNum <- function(permObj) {
   minVal = min(permObj$avgTestAcc)
   maxVal = max(permObj$avgTestAcc)
   medianVal = median(permObj$avgTestAcc)
   quantiles = quantile(permObj$avgTestAcc)
   
-  fiveNumSum = c()
+  fiveNum = c()
   
-  fiveNumSum$minimum = minVal
+  fiveNum$minimum = minVal
   
   return (list(minimum = minVal,
                lowerQ  = quantiles[2],
