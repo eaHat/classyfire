@@ -40,7 +40,7 @@
     Test_Class= testClass
   })
   
-  return(list(testsAcc    = accTest,
+  return(list(testAcc     = accTest,
               trainAcc    = accTrain,
               optGamma    = x1, 
               optCost     = x2,
@@ -118,30 +118,29 @@
 
 # Box constrained simplex
 
-.complexFunc <- function(iterNum = NULL, initPoints = NULL, bootRes = NULL, trainData = NULL, trainClass = NULL)
-{
+.complexFunc <- function(iterNum = NULL, initPoints = NULL, bootRes = NULL, trainData = NULL, trainClass = NULL) {
 	set.seed(iterNum)
 	x0 <- transpose(c(initPoints[1], initPoints[2]))
 	
 	fmsfundata <- structure(list(bootRes=bootRes, trainData=trainData, trainClass=trainClass), class='optimbase.functionargs')
 	
 	nm <- neldermead()
-	nm <- neldermead.set(nm, "-numberofvariables", 2)
-	nm <- neldermead.set(nm, "-costfargument", fmsfundata)
-	nm <- neldermead.set(nm, "-function", .radialSVM)
-	nm <- neldermead.set(nm, "-x0", x0)
-	nm <- neldermead.set(nm, "-verbose", FALSE)
-	nm <- neldermead.set(nm, "-storehistory", TRUE)
-	nm <- neldermead.set(nm, "-verbosetermination", FALSE)
-	nm <- neldermead.set(nm, "-method", "box")
-	nm <- neldermead.set(nm, "-boundsmin", c(-15,-5))
-	nm <- neldermead.set(nm, "-boundsmax", c(5,13))
- 	nm <- neldermead.set(nm, "-boxnbpoints", 3)
-	nm <- neldermead.set(nm, "-simplex0method", "randbounds")
-	nm <- neldermead.set(nm, "-scalingsimplex0", "tocenter")
+	nm <- neldermead.set(nm, 'numberofvariables', 2)
+	nm <- neldermead.set(nm, 'costfargument', fmsfundata)
+	nm <- neldermead.set(nm, 'function', .radialSVM)
+	nm <- neldermead.set(nm, 'x0', x0)
+	nm <- neldermead.set(nm, 'verbose', FALSE)
+	nm <- neldermead.set(nm, 'storehistory', TRUE)
+	nm <- neldermead.set(nm, 'verbosetermination', FALSE)
+	nm <- neldermead.set(nm, 'method', "box")
+	nm <- neldermead.set(nm, 'boundsmin', c(-15,-5))
+	nm <- neldermead.set(nm, 'boundsmax', c(5,13))
+ 	nm <- neldermead.set(nm, 'boxnbpoints', 3)
+	nm <- neldermead.set(nm, 'simplex0method', "randbounds")
+	nm <- neldermead.set(nm, 'scalingsimplex0', "tocenter")
 	
 	nm <- neldermead.search(nm)
 	
-	return(list(xopt = transpose(neldermead.get(nm, "-xopt"))))
+	return(list(xopt = transpose(neldermead.get(nm, 'xopt'))))
 }
 
