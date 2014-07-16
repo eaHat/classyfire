@@ -2,10 +2,9 @@
 
 # plot the test accuracies of the ensemble of classifiers
 
-
 ggbarTest <- function(ensObj, xlabel = NULL, ylabel=NULL, showText=FALSE, xlims=NULL, ylims= NULL, ...) {
   
-  acc = testAcc(ensObj)
+  acc = getTestAcc(ensObj)
   ens = length(ensObj)
   
   testDat = cbind (1:ens, acc)
@@ -30,7 +29,7 @@ ggbarTest <- function(ensObj, xlabel = NULL, ylabel=NULL, showText=FALSE, xlims=
 
 ggplotTrend <- function(ensObj, xlabel = NULL, ylabel=NULL, showText=FALSE, xlims=NULL, ylims= NULL, ...) {
   
-  acc = testAcc(ensObj)
+  acc = getTestAcc(ensObj)
   ens = length(ensObj)
   meanVal = acc[1]
   
@@ -72,7 +71,7 @@ ggplotTrend <- function(ensObj, xlabel = NULL, ylabel=NULL, showText=FALSE, xlim
 
 
 ggEnsHist <- function (ensObj, density = FALSE, percentiles = FALSE, mean = FALSE, median = FALSE) {
-  accuracies = testAcc(ensObj)
+  accuracies = getTestAcc(ensObj)
   accuracies = as.data.frame(accuracies)
   colnames(accuracies) = "Accuracies"
   avgVal = avgTestAcc(ensObj)
@@ -96,11 +95,11 @@ ggEnsHist <- function (ensObj, density = FALSE, percentiles = FALSE, mean = FALS
   }
   
   if (mean == TRUE){
-    m <- m + geom_vline(xintercept=mean(testAcc(ensObj)), color="red", linetype="dashed", size=0.8) 
+    m <- m + geom_vline(xintercept=mean(getTestAcc(ensObj)), color="red", linetype="dashed", size=0.8) 
   }
   
   if (median == TRUE){
-    m <- m + geom_vline(xintercept=median(testAcc(ensObj)), color="cyan", linetype="dashed", size=0.8) 
+    m <- m + geom_vline(xintercept=median(getTestAcc(ensObj)), color="cyan", linetype="dashed", size=0.8) 
   }
   
   return(m)
