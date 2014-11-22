@@ -1,0 +1,10 @@
+package.skeleton(name="classyfire", 
+                 code_files=c("bootstrap.R", 
+                              "cfBuild.R", 
+                              "cfPermute.R", 
+                              "cfPredict.R", 
+                              "complex.R", 
+                              "init.R", 
+                              "parallel.R", 
+                              "plots.R", 
+                              "stats.R")) 
