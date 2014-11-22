@@ -1,0 +1,15 @@
+classyfire-package	classyfire-package
+cfBuild	cfBuild
+cfBuild.default	cfBuild
+cfPermute	cfPermute
+cfPredict	cfPredict
+classyfire	classyfire-package
+getAcc	getAcc
+getAvgAcc	getAvgAcc
+getConfMatr	getConfMatr
+getOptParam	getOptParam
+getPerm5Num	getPerm5Num
+ggClassPred	ggClassPred
+ggEnsHist	ggEnsHist
+ggEnsTrend	ggEnsTrend
+ggPermHist	ggPermHist
