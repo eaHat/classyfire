@@ -9,7 +9,7 @@ The \code{cfPermute} function performs permutation testing on a classification e
 \usage{
 cfPermute(inputData, inputClass, bootNum = 100, ensNum = 100, permNum = 100, 
           parallel = TRUE, cpus = NULL, type = "SOCK", socketHosts = NULL, 
-          progressBar = TRUE)
+          progressBar = TRUE, scaling = TRUE)
 }
 \arguments{
   \item{inputData}{The input data matrix as provided by the user (mandatory field).}
@@ -22,6 +22,7 @@ cfPermute(inputData, inputClass, bootNum = 100, ensNum = 100, permNum = 100,
   \item{type}{The type of cluster. It can take the values `SOCK', `MPI', `PVM' or `NWS'. By default, type is equal to `SOCK'. For more details, see \link{sfInit}.}
   \item{socketHosts}{Host list for socket clusters. Only needed for socketmode (SOCK) and if using more than one machines (if using only your local machine (localhost) no list is needed). For more details, see \link{sfInit}.}
   \item{progressBar}{Boolean value that determines whether a progress bar should be displayed. By default set to \code{TRUE}.}
+  \item{scaling}{Boolean value that determines whether scaling should be applied (by default set to TRUE). Data are scaled internally, usually yielding better results. The parameters of SVM-models usually \emph{must} be tuned to yield sensible results. For more information, see function \link{svm}.}
 }
 \value{
 The \code{cfPermute} function returns an object in the form of an R list. The attributes of the list can be accessed by executing the \link{attributes} command. More specifically, the list of attributes includes:

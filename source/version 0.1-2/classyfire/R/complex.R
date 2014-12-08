@@ -9,7 +9,7 @@
 #
 # ************************************************************************
 
-.boxRadial <- function(seed, inputData, inputClass, bootNum) {
+.boxRadial <- function(seed, inputData, inputClass, bootNum, scaling) {
   runTime = system.time({
     testSamples = complexRes = c()
      
@@ -33,10 +33,10 @@
     x2 <- sample(-4:11, 1)
     
     # Train/optim with the complex algorithm 
-    complexRes <- .complexFunc(iterNum = seed, initPoints = c(x1,x2), bootRes = bootRes, trainData = trainData, trainClass = trainClass)
+    complexRes <- .complexFunc(iterNum = seed, initPoints = c(x1,x2), bootRes = bootRes, trainData = trainData, trainClass = trainClass, scaling = scaling)
       
     # Build final SVM with optimal hyperparams
-    svmMod    <- svm(trainData, trainClass, type="C-classification", kernel="radial",  gamma= 2^(complexRes$xopt[1]), cost= 2^(complexRes$xopt[2]))
+    svmMod    <- svm(trainData, trainClass, type="C-classification", kernel="radial",  gamma= 2^(complexRes$xopt[1]), cost= 2^(complexRes$xopt[2]), scale = scaling)
     predTest  <- predict(svmMod, testData)
     predTrain <- predict(svmMod, trainData)
     
@@ -101,6 +101,7 @@
 	bootIndices <- fmsfundata$bootRes
 	trainData   <- fmsfundata$trainData
 	trainClass  <- fmsfundata$trainClass
+  scaling     <- fmsfundata$scaling
 	
 	for (i in 1:nrow(bootIndices)) {
 		indices      <- bootIndices[i,]
@@ -112,7 +113,7 @@
 		rownames(bTrainData) <- NULL
 		
     # Construct the SVM model for each boostrap iteration
-		svmMod    <- svm(bTrainData, bTrainClass, type="C-classification", kernel="radial",  gamma= 2^(x[1]), cost= 2^(x[2]))
+		svmMod    <- svm(bTrainData, bTrainClass, type="C-classification", kernel="radial",  gamma= 2^(x[1]), cost= 2^(x[2]), scale = scaling)
     predClass <- predict(svmMod, bTestData)
 		falseTest <- length(which(as.vector(predClass) != as.vector(bTestClass), arr.ind=TRUE))
 		missclass <- (falseTest*100)/length(bTestClass)
@@ -127,11 +128,11 @@
 
 
 # Box constrained simplex
-.complexFunc <- function(iterNum = NULL, initPoints = NULL, bootRes = NULL, trainData = NULL, trainClass = NULL) {
+.complexFunc <- function(iterNum = NULL, initPoints = NULL, bootRes = NULL, trainData = NULL, trainClass = NULL, scaling = NULL) {
 	set.seed(iterNum)
 	x0 <- transpose(c(initPoints[1], initPoints[2]))
 	
-	fmsfundata <- structure(list(bootRes=bootRes, trainData=trainData, trainClass=trainClass), class='optimbase.functionargs')
+	fmsfundata <- structure(list(bootRes=bootRes, trainData=trainData, trainClass=trainClass, scaling=scaling), class='optimbase.functionargs')
 	
   # Configure the neldermead algorithm for the RBF SVM cost function (.radial SVM)
 	nm <- neldermead()

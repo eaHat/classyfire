@@ -9,13 +9,13 @@
 # **************************************************************************************************************
 
 
-cfPermute <- function (inputData, inputClass, bootNum = 100, ensNum = 100, permNum=100, parallel=TRUE, cpus=NULL, type = "SOCK", socketHosts = NULL, progressBar = TRUE) { 
+cfPermute <- function (inputData, inputClass, bootNum = 100, ensNum = 100, permNum=100, parallel=TRUE, cpus=NULL, type = "SOCK", socketHosts = NULL, progressBar = TRUE, scaling = TRUE) { 
   
   # Get the matrix of permuted classed
   permMatr <- .getPermMatr(inputClass, permNum)
   
   # Start parallelisation of the permutation process
-  permObj <- .snowRBFperm(inputData, permMatr, bootNum, ensNum, permNum, parallel, cpus, type, socketHosts, progressBar)
+  permObj <- .snowRBFperm(inputData, permMatr, bootNum, ensNum, permNum, parallel, cpus, type, socketHosts, progressBar, scaling)
   
   return (permObj)
 }
@@ -38,7 +38,7 @@ cfPermute <- function (inputData, inputClass, bootNum = 100, ensNum = 100, permN
 
 
 # Run parallel scripts using the snow/snowfall package in R
-.snowRBFperm <- function(inputData, permMatr, bootNum, ensNum, permNum, parallel, cpus, type, socketHosts, progressBar) {
+.snowRBFperm <- function(inputData, permMatr, bootNum, ensNum, permNum, parallel, cpus, type, socketHosts, progressBar, scaling) {
   permList = runTimes = totalTime = avgAcc = c()
   
   # Start the overall timer
@@ -53,33 +53,32 @@ cfPermute <- function (inputData, inputClass, bootNum = 100, ensNum = 100, permN
     sfLibrary("e1071",      character.only=TRUE)
     sfLibrary("boot",       character.only=TRUE)
     
-    if (progressBar == TRUE) { pb <- txtProgressBar(min = 0, max = permNum, style = 3) }
-    
     for (k in 1:permNum) { 
-      if (progressBar == TRUE) { Sys.sleep(0.1) }
-      
       inputClass    <- as.factor(as.matrix(permMatr[k,]))
       
       # Construct the classification ensemble, and count the overall execution time
-      execTime      <- system.time(ensRes <- sfLapply(1:ensNum, .boxRadial, inputData, inputClass, bootNum))
+      execTime      <- system.time(ensRes <- sfLapply(1:ensNum, .boxRadial, inputData, inputClass, bootNum, scaling))
       avgAcc        <- c(avgAcc, round(mean(sapply(ensRes,"[[",1)), digits=2))
       runTimes      <- c(runTimes, execTime[3])
       permList[[k]] <- ensRes
-      
-      if (progressBar == TRUE) { setTxtProgressBar(pb, k) }
     }
     
-    if (progressBar == TRUE) { close(pb) }
-    
-    totalTime <- proc.time() - ptm
-    
     names(runTimes) <- NULL
+    totalTime <- proc.time() - ptm
+    permList  <- list(avgAcc     = avgAcc,
+                      totalTime  = totalTime,
+                      execTimes  = round(runTimes, 2),
+                      permList   = permList)
     
-    return(list(avgAcc     = avgAcc,
-                totalTime  = totalTime,
-                execTimes  = round(runTimes, 2),
-                permList   = permList))
+    class(permList) <- append(class(permList), "cfPermute")
+    
+    return(permList)
     
     sfStop()
   }, finally=sfStop())
+}
+
+
+.snowRBF <- function(inputData, inputClass, bootNum, ensNum, parallel, cpus, type, socketHosts) {
+
 }

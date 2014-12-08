@@ -12,7 +12,9 @@
 
 
 # Get the test and train accuracies within the ensemble
-getAcc     <- function(ensObj) {
+getAcc <- function(ensObj) {
+  .argsCheck(ensObj, "cfBuild")
+  
   testAcc  <- round(ensObj$testAcc,  digits=2)
   trainAcc <- round(ensObj$trainAcc, digits=2)
   
@@ -21,6 +23,8 @@ getAcc     <- function(ensObj) {
 
 # Get the average test and train overall accuracy of the ensemble
 getAvgAcc  <- function(ensObj) {
+  .argsCheck(ensObj, "cfBuild")
+  
   avgTest  <- round(mean(ensObj$testAcc),  digits=2)
   avgTrain <- round(mean(ensObj$trainAcc), digits=2)
   
@@ -29,6 +33,8 @@ getAvgAcc  <- function(ensObj) {
 
 # Get the optimal hyperparameters 
 getOptParam <- function(ensObj) {
+  .argsCheck(ensObj, "cfBuild")
+  
   gamma     <- ensObj$optGamma
   cost      <- ensObj$optCost
   optHyper  <- cbind(gamma, cost)
@@ -39,6 +45,8 @@ getOptParam <- function(ensObj) {
 
 # Get the overall confusion matrix of the ensemble
 getConfMatr <- function(ensObj) {
+  .argsCheck(ensObj, "cfBuild")
+  
   totalConf <- Reduce("+", ensObj$confMatr)
   propTable <- round(prop.table(totalConf, 1)*100)
   
@@ -47,6 +55,8 @@ getConfMatr <- function(ensObj) {
 
 # Get the descriptive statistics (five number summary) of the permutation run
 getPerm5Num <- function(permObj) {
+  .argsCheck(permObj, "cfPermute")
+  
   minVal    <- min(permObj$avgAcc)
   maxVal    <- max(permObj$avgAcc)
   medianVal <- median(permObj$avgAcc)

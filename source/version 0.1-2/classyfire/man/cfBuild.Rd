@@ -11,7 +11,7 @@ The \code{cfBuild} function creates a highly optimised ensemble of radial basis 
 cfBuild(inputData, inputClass, ...)
 
 \method{cfBuild}{default}(inputData, inputClass, bootNum = 100, ensNum = 100, parallel=TRUE, 
-        cpus = NULL, type = "SOCK", socketHosts = NULL, ...)
+        cpus = NULL, type = "SOCK", socketHosts = NULL, scaling = TRUE, ...)
 }
 \arguments{
   \item{inputData}{The input data matrix as provided by the user (mandatory field).}
@@ -22,6 +22,7 @@ cfBuild(inputData, inputClass, ...)
   \item{cpus}{Numeric value that provides the number of CPUs requested for the cluster. For more details, see \link{sfInit}.}
   \item{type}{The type of cluster. It can take the values `SOCK', `MPI', `PVM' or `NWS'. By default, type is equal to `SOCK'. For more details, see \link{sfInit}.}
   \item{socketHosts}{Host list for socket clusters. Only needed for socketmode (SOCK) and if using more than one machines (if using only your local machine (localhost) no list is needed). For more details, see \link{sfInit}.}
+  \item{scaling}{Boolean value that determines whether scaling should be applied (by default set to TRUE). Data are scaled internally, usually yielding better results. The parameters of SVM-models usually \emph{must} be tuned to yield sensible results. For more information, see function \link{svm}.}
   \item{...}{The remaining optional fields.}
 }
 \value{
@@ -47,7 +48,7 @@ Ultimately, the optimal parameters are used to train a new classifier with the f
 \note{
   \itemize{
     \item
-    Data are scaled internally, usually yielding better results. The parameters of SVM-models usually \emph{must} be tuned to yield sensible results! For more information, see function \link{svm}.
+    By default data are scaled internally, usually yielding better results. The parameters of SVM-models usually \emph{must} be tuned to yield sensible results! For more information, see function \link{svm}.
 
     \item
     The \code{cfBuild} function does not force an upper limit for the bootNum, ensNum and cpus parameters to the users. However, it is advisable not to use extremely high values for these parameters.
