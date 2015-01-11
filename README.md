@@ -31,13 +31,14 @@ irisData  <- iris[,-5]
 
 Construct a classification ensemble **in parallel** (using 4 cpus in this instance) that consists of 10 independent classification models (classifiers) optimised using 10 bootstrap iterations
 ```
-ens <- cfBuild(inputData = irisData, inputClass = irisClass, bootNum = 10, ensNum = 10, parallel = TRUE,
-               cpus = 4, type = "SOCK")
+ens <- cfBuild(inputData = irisData, inputClass = irisClass, bootNum = 10, ensNum = 10, 
+               parallel = TRUE, cpus = 4, type = "SOCK")
 ```
 
 Similarly, **in sequence**: 
 ```
-ens <- cfBuild(inputData = irisData, inputClass = irisClass, bootNum = 10, ensNum = 10, parallel = FALSE)
+ens <- cfBuild(inputData = irisData, inputClass = irisClass, bootNum = 10, ensNum = 10, 
+               parallel = FALSE)
 ```
 
 ### Testing new unknown data (in this instance, random data)
@@ -50,8 +51,8 @@ predRes  <- cfPredict(ens, testMatr)
 ### Determining statistical significance by permutation testing
 
 ```
-permObj <- cfPermute(irisData, irisClass, bootNum = 10, ensNum = 10, permNum = 5, parallel = TRUE, 
-                     cpus = 4, type = "SOCK")
+permObj <- cfPermute(irisData, irisClass, bootNum = 10, ensNum = 10, permNum = 5,
+                     parallel = TRUE, cpus = 4, type = "SOCK")
 ```
 
 ### Evaluating the classification ensemble
