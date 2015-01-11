@@ -1,0 +1,13 @@
+classyfire NEWS
+========================================================
+Release version 0.1-2
+January 2014
+
+- Introducing Unit Tests for automated testing (/tests)
+- New Vignette “classyfire_cheat_sheet” (/vignettes)
+- New function ggFusedHist
+- Message functionality on attach of the package
+- Added thorough checks for input arguments 
+- Modified functionality to allow more tests and checks (cfBuild and cfPermute append relevant class) 
+- Updated documentation in the help pages (/man)
+- Bug fixes
