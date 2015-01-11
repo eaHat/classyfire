@@ -9,5 +9,6 @@ Description: A collection of functions for the creation and application of highl
 License: GPL (>= 2)
 Depends: R (>= 3.0.0), snowfall (>= 1.84-6), e1071 (>= 1.6-3), boot (>= 1.3-11), neldermead (>= 1.0-9)
 Imports: ggplot2 (>= 1.0-0), optimbase (>= 1.0-9)
-Suggests: RUnit (>= 0.4.27), knitr
+Suggests: RUnit, knitr
 VignetteBuilder: knitr
+BugReports: https://github.com/eaHat/classyfire/issues
