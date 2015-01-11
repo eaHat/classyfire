@@ -21,7 +21,7 @@ library(classyfire)
 
 ### Building a classification ensemble
 
-Loading some test data, for instance the \textbf{iris} dataset
+Loading some test data, for instance the *iris* dataset
 ```
 data(iris)
 
