@@ -12,7 +12,7 @@ The classyfire package provides a collection of functions for the creation and a
 ### Usage
 
 Install from CRAN and load in the R console
-```
+```R
 install.packages("classyfire")
 library(classyfire)
 ??classyfire
