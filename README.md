@@ -21,7 +21,7 @@ library(classyfire)
 ### Building a classification ensemble
 
 Loading some test data, for instance the *iris* dataset
-```
+```R
 data(iris)
 
 irisClass <- iris[,5]
@@ -29,27 +29,27 @@ irisData  <- iris[,-5]
 ```
 
 Construct a classification ensemble **in parallel** (using 4 cpus in this instance) that consists of 10 independent classification models (classifiers) optimised using 10 bootstrap iterations
-```
+```R
 ens <- cfBuild(inputData = irisData, inputClass = irisClass, bootNum = 10, ensNum = 10, 
                parallel = TRUE, cpus = 4, type = "SOCK")
 ```
 
 Similarly, **in sequence**: 
-```
+```R
 ens <- cfBuild(inputData = irisData, inputClass = irisClass, bootNum = 10, ensNum = 10, 
                parallel = FALSE)
 ```
 
 ### Testing new unknown data (in this instance, random data)
 
-```
+```R
 testMatr <- matrix(runif(400)*100, ncol = ncol(irisData))           
 predRes  <- cfPredict(ens, testMatr)
 ```
 
 ### Determining statistical significance by permutation testing
 
-```
+```R
 permObj <- cfPermute(irisData, irisClass, bootNum = 10, ensNum = 10, permNum = 5,
                      parallel = TRUE, cpus = 4, type = "SOCK")
 ```
@@ -58,7 +58,7 @@ permObj <- cfPermute(irisData, irisClass, bootNum = 10, ensNum = 10, permNum = 5
 
 All the functions for descriptive statistics within classyfire start with the prefix "**get**". For example: 
 
-```
+```R
 getAvgAcc(ens)
 getAcc(ens)
 getConfMatr(ens)
@@ -70,7 +70,7 @@ getPerm5Num(permObj)
 
 All the functions for plotting within classyfire start with the prefix "**gg**" since the R package *ggplot2* is in use. For example: 
 
-```
+```R
 ggClassPred(ens)
 ggEnsTrend(ens)
 ggEnsHist(ens)
